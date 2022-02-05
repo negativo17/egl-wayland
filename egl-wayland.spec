@@ -1,6 +1,6 @@
 Name:           egl-wayland
 Version:        1.1.9
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Wayland EGL External Platform library
 
 License:        MIT
@@ -15,13 +15,8 @@ Patch2:         %url/commit/582b2d345abaa0e313cf16c902e602084ea59551.patch
 BuildRequires:  meson
 BuildRequires:  libtool
 BuildRequires:  eglexternalplatform-devel
-%if 0%{?fedora}
 BuildRequires:  cmake
 BuildRequires:  libglvnd-devel >= 1.3.4
-%else
-BuildRequires:  cmake3
-BuildRequires:  mesa-libEGL-devel
-%endif
 BuildRequires:  wayland-devel
 BuildRequires:  wayland-protocols-devel
 
@@ -40,24 +35,18 @@ Wayland EGL External Platform library development package
 
 %prep
 %autosetup -p1
-%if 0%{?rhel}
-sed -i -e 's@>= 0.50@>= 0.47@g'  meson.build
-%endif
 
 %build
 %meson
 %meson_build
 
-
 %install
 %meson_install
 install -m 0755 -d %{buildroot}%{_datadir}/egl/egl_external_platform.d/
 install -pm 0644 %{SOURCE1} %{SOURCE2} %{buildroot}%{_datadir}/egl/egl_external_platform.d/
-find %{buildroot} -name '*.la' -exec rm -f {} ';'
+find %{buildroot} -name '*.la' -delete
 
-
-%ldconfig_scriptlets
-
+%{?ldconfig_scriptlets}
 
 %files
 %doc README.md
@@ -73,6 +62,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %{_datadir}/wayland-eglstream/
 
 %changelog
+* Sat Feb 05 2022 Simone Caronni <negativo17@gmail.com> - 1.1.9-4
+- Small cleanup.
+
 * Tue Nov 23 2021 Leigh Scott <leigh123linux@gmail.com> - 1.1.9-3
 - Add upstream commits
 
