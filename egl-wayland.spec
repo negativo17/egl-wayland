@@ -1,16 +1,23 @@
-Name:           egl-wayland
-Version:        1.1.9
-Release:        4%{?dist}
-Summary:        Wayland EGL External Platform library
+%global commit0 247335d5d451bc56af08781c70f8bc96926cbf23
+%global date 20220601
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+#global tag %{version}
 
+Name:           egl-wayland
+Version:        1.1.10
+Release:        1%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
+Summary:        Wayland EGL External Platform library
 License:        MIT
 URL:            https://github.com/NVIDIA/%{name}
+
+%if 0%{?tag:1}
 Source0:        %url/archive/%{version}/%{name}-%{version}.tar.gz
+%else
+Source0:        %url/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+%endif
+
 Source1:        10_nvidia_wayland.json
 Source2:        15_nvidia_gbm.json
-Patch0:         %url/commit/d4937adc5cd04ac7df98fc5616e40319fb52fdee.patch
-Patch1:         %url/commit/daab8546eca8428543a4d958a2c53fc747f70672.patch
-Patch2:         %url/commit/582b2d345abaa0e313cf16c902e602084ea59551.patch
 
 BuildRequires:  meson
 BuildRequires:  libtool
@@ -34,7 +41,11 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 Wayland EGL External Platform library development package
 
 %prep
+%if 0%{?tag:1}
 %autosetup -p1
+%else
+%autosetup -p1 -n %{name}-%{commit0}
+%endif
 
 %build
 %meson
@@ -45,8 +56,6 @@ Wayland EGL External Platform library development package
 install -m 0755 -d %{buildroot}%{_datadir}/egl/egl_external_platform.d/
 install -pm 0644 %{SOURCE1} %{SOURCE2} %{buildroot}%{_datadir}/egl/egl_external_platform.d/
 find %{buildroot} -name '*.la' -delete
-
-%{?ldconfig_scriptlets}
 
 %files
 %doc README.md
@@ -62,6 +71,10 @@ find %{buildroot} -name '*.la' -delete
 %{_datadir}/wayland-eglstream/
 
 %changelog
+* Thu Jun 09 2022 Simone Caronni <negativo17@gmail.com> - 1.1.10-1.20220601git247335d
+- Update to latest 1.10 snapshot
+  (https://github.com/negativo17/nvidia-driver/issues/131).
+
 * Sat Feb 05 2022 Simone Caronni <negativo17@gmail.com> - 1.1.9-4
 - Small cleanup.
 
