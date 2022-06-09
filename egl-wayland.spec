@@ -23,6 +23,7 @@ BuildRequires:  meson
 BuildRequires:  libtool
 BuildRequires:  eglexternalplatform-devel
 BuildRequires:  cmake
+BuildRequires:  libdrm-devel
 BuildRequires:  libglvnd-devel >= 1.3.4
 BuildRequires:  wayland-devel
 BuildRequires:  wayland-protocols-devel
