@@ -1,11 +1,11 @@
 %global commit0 247335d5d451bc56af08781c70f8bc96926cbf23
 %global date 20220601
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-#global tag %{version}
+%global tag %{version}
 
 Name:           egl-wayland
 Version:        1.1.10
-Release:        1%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
+Release:        2%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        Wayland EGL External Platform library
 License:        MIT
 URL:            https://github.com/NVIDIA/%{name}
@@ -72,6 +72,9 @@ find %{buildroot} -name '*.la' -delete
 %{_datadir}/wayland-eglstream/
 
 %changelog
+* Mon Jun 13 2022 Simone Caronni <negativo17@gmail.com> - 1.1.10-2
+- Update to official 1.1.10 release.
+
 * Thu Jun 09 2022 Simone Caronni <negativo17@gmail.com> - 1.1.10-1.20220601git247335d
 - Update to latest 1.10 snapshot
   (https://github.com/negativo17/nvidia-driver/issues/131).
