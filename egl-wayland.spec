@@ -1,11 +1,11 @@
-%global commit0 d0febeedfd8ded6872029c83a80f7a9997ed1f49
-%global date 20220626
+%global commit0 885f0a5e91fe9cfbfbcd98ff01f6b83503decef3
+%global date 20220806
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 #global tag %{version}
 
 Name:           egl-wayland
 Version:        1.1.10
-Release:        3%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
+Release:        4%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        Wayland EGL External Platform library
 License:        MIT
 URL:            https://github.com/NVIDIA/%{name}
@@ -72,6 +72,9 @@ find %{buildroot} -name '*.la' -delete
 %{_datadir}/wayland-eglstream/
 
 %changelog
+* Wed Aug 10 2022 Simone Caronni <negativo17@gmail.com> - 1.1.10-4.20220806git885f0a5
+- Update to latest snapshot.
+
 * Wed Jun 29 2022 Simone Caronni <negativo17@gmail.com> - 1.1.10-3.20220626gitd0febee
 - Update to latest snapshot:
   https://forums.developer.nvidia.com/t/properties-and-filters-windows-make-obs-hang-on-wayland-when-closed/213009/12
