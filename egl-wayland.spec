@@ -4,8 +4,8 @@
 %global tag %{version}
 
 Name:           egl-wayland
-Version:        1.1.11
-Release:        1%{?dist}
+Version:        1.1.12
+Release:        1%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        Wayland EGL External Platform library
 License:        MIT
 URL:            https://github.com/NVIDIA/%{name}
@@ -72,6 +72,9 @@ find %{buildroot} -name '*.la' -delete
 %{_datadir}/wayland-eglstream/
 
 %changelog
+* Thu Jun 08 2023 Simone Caronni <negativo17@gmail.com> - 1.1.12-1
+- Update to 1.1.12.
+
 * Thu Sep 15 2022 Simone Caronni <negativo17@gmail.com> - 1.1.11-1
 - Update to 1.1.11.
 
