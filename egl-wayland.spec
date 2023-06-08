@@ -6,7 +6,7 @@
 Name:           egl-wayland
 Version:        1.1.12
 Release:        1%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
-Summary:        Wayland EGL External Platform library
+Summary:        EGLStream-based Wayland external platform
 License:        MIT
 URL:            https://github.com/NVIDIA/%{name}
 
@@ -32,14 +32,24 @@ BuildRequires:  wayland-protocols-devel
 Requires:       libglvnd-egl%{?_isa}
 
 %description
-Wayland EGL External Platform library
+EGL External Platform library to add client-side Wayland support to EGL on top
+of EGLDevice and EGLStream families of extensions.
+
+This library implements an EGL External Platform interface to work along with
+EGL drivers that support the external platform mechanism.
 
 %package devel
-Summary:        Wayland EGL External Platform library development package
+Summary:        EGLStream-based Wayland external platform development files
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
-Wayland EGL External Platform library development package
+EGL External Platform library to add client-side Wayland support to EGL on top
+of EGLDevice and EGLStream families of extensions.
+
+This library implements an EGL External Platform interface to work along with
+EGL drivers that support the external platform mechanism.
+
+This package contains development files.
 
 %prep
 %if 0%{?tag:1}
