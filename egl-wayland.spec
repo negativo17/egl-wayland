@@ -5,7 +5,7 @@
 
 Name:           egl-wayland
 Version:        1.1.13
-Release:        1%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
+Release:        2%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        EGLStream-based Wayland external platform
 License:        MIT
 URL:            https://github.com/NVIDIA/%{name}
@@ -18,6 +18,7 @@ Source0:        %url/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 Source1:        10_nvidia_wayland.json
 Source2:        15_nvidia_gbm.json
+Patch0:         https://github.com/NVIDIA/egl-wayland/commit/3f673dcb7c9b20145ca74b359f62e65c948a7f21.patch
 
 BuildRequires:  meson
 BuildRequires:  libtool
@@ -82,6 +83,9 @@ find %{buildroot} -name '*.la' -delete
 %{_datadir}/wayland-eglstream/
 
 %changelog
+* Wed May 29 2024 Simone Caronni <negativo17@gmail.com> - 1.1.13-2
+- Backport upstream patch.
+
 * Sat Oct 21 2023 Simone Caronni <negativo17@gmail.com> - 1.1.13-1
 - Update to 1.1.13.
 
