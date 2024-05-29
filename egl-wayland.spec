@@ -1,11 +1,11 @@
-%global commit0 369b3372ba94c2bb097c93585a18b1b2f82d3421
-%global date 20240119
+%global commit0 067e43d0d4af82e4ea3fdc8ce476e6a24f69956f
+%global date 20240419
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 #global tag %{version}
 
 Name:           egl-wayland
 Version:        1.1.13
-Release:        2%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
+Release:        3%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        EGLStream-based Wayland external platform
 License:        MIT
 URL:            https://github.com/NVIDIA/%{name}
@@ -26,7 +26,7 @@ BuildRequires:  cmake
 BuildRequires:  libdrm-devel
 BuildRequires:  libglvnd-devel >= 1.3.4
 BuildRequires:  wayland-devel
-BuildRequires:  wayland-protocols-devel
+BuildRequires:  wayland-protocols-devel >= 1.34
 
 # Required for directory ownership
 Requires:       libglvnd-egl%{?_isa}
@@ -82,6 +82,9 @@ find %{buildroot} -name '*.la' -delete
 %{_datadir}/wayland-eglstream/
 
 %changelog
+* Wed May 29 2024 Simone Caronni <negativo17@gmail.com> - 1.1.13-3.20240419git067e43d
+- Update to latest snapshot.
+
 * Wed Mar 06 2024 Simone Caronni <negativo17@gmail.com> - 1.1.13-2.20240119git369b337
 - Update to the latest snapshot.
 
