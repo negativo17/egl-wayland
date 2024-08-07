@@ -5,7 +5,7 @@
 
 Name:           egl-wayland
 Version:        1.1.13.1
-Release:        1%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
+Release:        2%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        EGLStream-based Wayland external platform
 License:        MIT
 URL:            https://github.com/NVIDIA/%{name}
@@ -21,12 +21,15 @@ Source2:        15_nvidia_gbm.json
 
 BuildRequires:  meson
 BuildRequires:  libtool
-BuildRequires:  eglexternalplatform-devel
+BuildRequires:  pkgconfig(eglexternalplatform) >= 1.1
 BuildRequires:  cmake
 BuildRequires:  libdrm-devel
 BuildRequires:  libglvnd-devel >= 1.3.4
-BuildRequires:  wayland-devel
-BuildRequires:  wayland-protocols-devel
+BuildRequires:  pkgconfig(wayland-client)
+BuildRequires:  pkgconfig(wayland-egl-backend) >= 3
+BuildRequires:  pkgconfig(wayland-protocols) >= 1.8
+BuildRequires:  pkgconfig(wayland-scanner)
+BuildRequires:  pkgconfig(wayland-server)
 
 # Required for directory ownership
 Requires:       libglvnd-egl%{?_isa}
@@ -82,6 +85,9 @@ find %{buildroot} -name '*.la' -delete
 %{_datadir}/wayland-eglstream/
 
 %changelog
+* Wed Aug 07 2024 Simone Caronni <negativo17@gmail.com> - 1.1.13.1-2
+- Update build requirements.
+
 * Mon Aug 05 2024 Simone Caronni <negativo17@gmail.com> - 1.1.13.1-1
 - Update to 1.1.13.1 which includes the backported patch for driver 560+.
 
