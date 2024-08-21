@@ -1,11 +1,11 @@
-%global commit0 f30cb0e4c9a215e933dc8250f5dad4e96d4f2136
-%global date 20240814
+%global commit0 8188db9a5dc734c385b5f42f1dbb13c0e126d17e
+%global date 20240819
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 #global tag %{version}
 
 Name:           egl-wayland
 Version:        1.1.15
-Release:        2%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
+Release:        3%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        EGLStream-based Wayland external platform
 License:        MIT
 URL:            https://github.com/NVIDIA/%{name}
@@ -24,7 +24,7 @@ BuildRequires:  libtool
 BuildRequires:  pkgconfig(eglexternalplatform) >= 1.1
 BuildRequires:  cmake
 BuildRequires:  libdrm-devel
-BuildRequires:  libglvnd-devel >= 1.3.4
+BuildRequires:  pkgconfig(egl) >= 1.5
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-egl-backend) >= 3
 # Explicit synchronization since 1.34:
@@ -86,6 +86,9 @@ find %{buildroot} -name '*.la' -delete
 %{_datadir}/wayland-eglstream/
 
 %changelog
+* Wed Aug 21 2024 Simone Caronni <negativo17@gmail.com> - 1.1.15-3.20240819git8188db9
+- Update to latest snapshot.
+
 * Thu Aug 15 2024 Simone Caronni <negativo17@gmail.com> - 1.1.15-2.20240814gitf30cb0e
 - Update to latest snapshot, fixes Qt6 webengine.
 
