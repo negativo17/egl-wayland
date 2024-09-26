@@ -5,7 +5,7 @@
 
 Name:           egl-wayland
 Version:        1.1.13.1
-Release:        2%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
+Release:        3%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        EGLStream-based Wayland external platform
 License:        MIT
 URL:            https://github.com/NVIDIA/%{name}
@@ -17,7 +17,6 @@ Source0:        %url/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 %endif
 
 Source1:        10_nvidia_wayland.json
-Source2:        15_nvidia_gbm.json
 
 BuildRequires:  meson
 BuildRequires:  libtool
@@ -68,7 +67,7 @@ This package contains development files.
 %install
 %meson_install
 install -m 0755 -d %{buildroot}%{_datadir}/egl/egl_external_platform.d/
-install -pm 0644 %{SOURCE1} %{SOURCE2} %{buildroot}%{_datadir}/egl/egl_external_platform.d/
+install -pm 0644 %{SOURCE1} %{buildroot}%{_datadir}/egl/egl_external_platform.d/
 find %{buildroot} -name '*.la' -delete
 
 %files
@@ -76,7 +75,6 @@ find %{buildroot} -name '*.la' -delete
 %license COPYING
 %{_libdir}/*.so.*
 %{_datadir}/egl/egl_external_platform.d/10_nvidia_wayland.json
-%{_datadir}/egl/egl_external_platform.d/15_nvidia_gbm.json
 
 %files devel
 %{_libdir}/libnvidia-egl-wayland.so
@@ -85,6 +83,9 @@ find %{buildroot} -name '*.la' -delete
 %{_datadir}/wayland-eglstream/
 
 %changelog
+* Thu Sep 26 2024 Simone Caronni <negativo17@gmail.com> - 1.1.13.1-3
+- Drop gbm ICD loader that went in egl-gbm (#163).
+
 * Wed Aug 07 2024 Simone Caronni <negativo17@gmail.com> - 1.1.13.1-2
 - Update build requirements.
 
