@@ -1,0 +1,28 @@
+diff -Naur egl-wayland-f1fd51456710b567717a970dd4e1b2347792ac13.old/Makefile.am egl-wayland-f1fd51456710b567717a970dd4e1b2347792ac13/Makefile.am
+--- egl-wayland-f1fd51456710b567717a970dd4e1b2347792ac13.old/Makefile.am	2025-04-03 09:19:13.939642717 +0200
++++ egl-wayland-f1fd51456710b567717a970dd4e1b2347792ac13/Makefile.am	2025-04-03 09:26:17.650860088 +0200
+@@ -138,10 +138,10 @@
+ $(libnvidia_egl_wayland_la_dmabuf_built_client_headers):%-client-protocol.h : $(WAYLAND_PROTOCOLS_DATADIR)/unstable/linux-dmabuf/%.xml
+ 	$(AM_V_GEN)$(WAYLAND_SCANNER) client-header < $< > $@
+ 
+-$(libnvidia_egl_wayland_la_drm_syncobj_built_private_protocols):%-protocol.c : $(WAYLAND_PROTOCOLS_DATADIR)/staging/linux-drm-syncobj/%.xml
++$(libnvidia_egl_wayland_la_drm_syncobj_built_private_protocols):%-protocol.c : src/%.xml
+ 	$(AM_V_GEN)$(WAYLAND_SCANNER) $(WAYLAND_PRIVATE_CODEGEN) < $< > $@
+ 
+-$(libnvidia_egl_wayland_la_drm_syncobj_built_client_headers):%-client-protocol.h : $(WAYLAND_PROTOCOLS_DATADIR)/staging/linux-drm-syncobj/%.xml
++$(libnvidia_egl_wayland_la_drm_syncobj_built_client_headers):%-client-protocol.h : src/%.xml
+ 	$(AM_V_GEN)$(WAYLAND_SCANNER) client-header < $< > $@
+ 
+ $(libnvidia_egl_wayland_la_presentation_time_private_protocols):%-protocol.c : $(WAYLAND_PROTOCOLS_DATADIR)/stable/presentation-time/%.xml
+diff -Naur egl-wayland-f1fd51456710b567717a970dd4e1b2347792ac13.old/src/meson.build egl-wayland-f1fd51456710b567717a970dd4e1b2347792ac13/src/meson.build
+--- egl-wayland-f1fd51456710b567717a970dd4e1b2347792ac13.old/src/meson.build	2025-04-03 09:19:13.940399943 +0200
++++ egl-wayland-f1fd51456710b567717a970dd4e1b2347792ac13/src/meson.build	2025-04-03 09:26:01.489288838 +0200
+@@ -20,7 +20,7 @@
+ wl_protos_dir = wl_protos.get_pkgconfig_variable('pkgdatadir')
+ wl_dmabuf_xml = join_paths(wl_protos_dir, 'unstable', 'linux-dmabuf', 'linux-dmabuf-unstable-v1.xml')
+ wp_presentation_time_xml = join_paths(wl_protos_dir, 'stable', 'presentation-time', 'presentation-time.xml')
+-wl_drm_syncobj_xml = join_paths(wl_protos_dir, 'staging', 'linux-drm-syncobj', 'linux-drm-syncobj-v1.xml')
++wl_drm_syncobj_xml = 'linux-drm-syncobj-v1.xml'
+ 
+ client_header = generator(prog_scanner,
+     output : '@BASENAME@-client-protocol.h',
