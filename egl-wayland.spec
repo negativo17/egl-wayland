@@ -16,7 +16,6 @@ Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 Source0:        %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
 %endif
 # Explicit synchronization is in since 1.34:
-Source1:        https://gitlab.freedesktop.org/wayland/wayland-protocols/-/raw/1.34/staging/linux-drm-syncobj/linux-drm-syncobj-v1.xml
 Patch0:         %{name}-linux-drm-syncobj.patch
 
 BuildRequires:  cmake
@@ -60,7 +59,6 @@ This package contains development files.
 %else
 %autosetup -p1 -n %{name}-%{commit0}
 %endif
-cp %{SOURCE1} src/
 
 %build
 %meson
