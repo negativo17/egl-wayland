@@ -1,11 +1,11 @@
 %global commit0 f1fd51456710b567717a970dd4e1b2347792ac13
 %global date 20250313
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-#global tag %{version}
+%global tag %{version}
 
 Name:           egl-wayland
 Version:        1.1.19%{!?tag:~%{date}git%{shortcommit0}}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        EGLStream-based Wayland external platform
 License:        MIT
 URL:            https://github.com/NVIDIA/%{name}
@@ -82,6 +82,9 @@ find %{buildroot} -name '*.la' -delete
 %{_libdir}/pkgconfig/wayland-eglstream.pc
 
 %changelog
+* Wed Apr 23 2025 Simone Caronni <negativo17@gmail.com> - 1.1.19-2
+- Update to 1.1.19 final.
+
 * Mon Mar 17 2025 Simone Caronni <negativo17@gmail.com> - 1.1.19~20250313gitf1fd514-1
 - Update to latest snapshot.
 - Trim changelog.
