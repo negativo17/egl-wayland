@@ -4,8 +4,8 @@
 %global tag %{version}
 
 Name:           egl-wayland
-Version:        1.1.19%{!?tag:~%{date}git%{shortcommit0}}
-Release:        2%{?dist}
+Version:        1.1.20%{!?tag:~%{date}git%{shortcommit0}}
+Release:        1%{?dist}
 Summary:        EGLStream-based Wayland external platform
 License:        MIT
 URL:            https://github.com/NVIDIA/%{name}
@@ -15,8 +15,10 @@ Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 %else
 Source0:        %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
 %endif
-# Explicit synchronization is in since 1.34:
-Patch0:         %{name}-linux-drm-syncobj.patch
+
+# Bundle missing Wayland Protocols:
+Source:         https://gitlab.freedesktop.org/wayland/wayland-protocols/-/raw/1.45/staging/linux-drm-syncobj/linux-drm-syncobj-v1.xml
+Patch0:         %{name}-missing-protocols.patch
 
 BuildRequires:  cmake
 BuildRequires:  meson
@@ -60,6 +62,8 @@ This package contains development files.
 %autosetup -p1 -n %{name}-%{commit0}
 %endif
 
+cp %{SOURCE1} src/
+
 %build
 %meson
 %meson_build
@@ -72,7 +76,7 @@ find %{buildroot} -name '*.la' -delete
 %doc README.md
 %license COPYING
 %{_libdir}/libnvidia-egl-wayland.so.1
-%{_libdir}/libnvidia-egl-wayland.so.1.1.19
+%{_libdir}/libnvidia-egl-wayland.so.1.*
 %{_datadir}/egl/egl_external_platform.d/10_nvidia_wayland.json
 
 %files devel
@@ -82,6 +86,10 @@ find %{buildroot} -name '*.la' -delete
 %{_libdir}/pkgconfig/wayland-eglstream.pc
 
 %changelog
+* Thu Aug 07 2025 Simone Caronni <negativo17@gmail.com> - 1.1.20-1
+- Update to 1.1.20.
+- Do not patch in xml protocol definition, add it as source.
+
 * Wed Apr 23 2025 Simone Caronni <negativo17@gmail.com> - 1.1.19-2
 - Update to 1.1.19 final.
 
