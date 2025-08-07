@@ -17,7 +17,7 @@ Source0:        %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
 %endif
 
 # Bundle missing Wayland Protocols:
-Source:         https://gitlab.freedesktop.org/wayland/wayland-protocols/-/raw/1.45/staging/linux-drm-syncobj/linux-drm-syncobj-v1.xml
+Source1:        https://gitlab.freedesktop.org/wayland/wayland-protocols/-/raw/1.45/staging/linux-drm-syncobj/linux-drm-syncobj-v1.xml
 Patch0:         %{name}-missing-protocols.patch
 
 BuildRequires:  cmake
