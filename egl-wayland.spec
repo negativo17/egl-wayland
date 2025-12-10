@@ -1,20 +1,11 @@
-%global commit0 f1fd51456710b567717a970dd4e1b2347792ac13
-%global date 20250313
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global tag %{version}
-
 Name:           egl-wayland
-Version:        1.1.21%{!?tag:~%{date}git%{shortcommit0}}
+Version:        1.1.21
 Release:        1%{?dist}
 Summary:        EGLStream-based Wayland external platform
 License:        MIT
 URL:            https://github.com/NVIDIA/%{name}
 
-%if 0%{?tag:1}
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
-%else
-Source0:        %{url}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
-%endif
 
 # Bundle missing Wayland Protocols:
 Source1:        https://gitlab.freedesktop.org/wayland/wayland-protocols/-/raw/1.45/staging/linux-drm-syncobj/linux-drm-syncobj-v1.xml
@@ -56,11 +47,7 @@ EGL drivers that support the external platform mechanism.
 This package contains development files.
 
 %prep
-%if 0%{?tag:1}
 %autosetup -p1
-%else
-%autosetup -p1 -n %{name}-%{commit0}
-%endif
 
 cp %{SOURCE1} src/
 
