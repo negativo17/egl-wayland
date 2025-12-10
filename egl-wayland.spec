@@ -4,7 +4,7 @@
 %global tag %{version}
 
 Name:           egl-wayland
-Version:        1.1.20%{!?tag:~%{date}git%{shortcommit0}}
+Version:        1.1.21%{!?tag:~%{date}git%{shortcommit0}}
 Release:        1%{?dist}
 Summary:        EGLStream-based Wayland external platform
 License:        MIT
@@ -86,6 +86,9 @@ find %{buildroot} -name '*.la' -delete
 %{_libdir}/pkgconfig/wayland-eglstream.pc
 
 %changelog
+* Wed Dec 10 2025 Simone Caronni <negativo17@gmail.com> - 1.1.21-1
+- Update to 1.1.21.
+
 * Thu Aug 07 2025 Simone Caronni <negativo17@gmail.com> - 1.1.20-1
 - Update to 1.1.20.
 - Do not patch in xml protocol definition, add it as source.
