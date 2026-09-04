@@ -1,5 +1,5 @@
 Name:           egl-wayland
-Version:        1.1.21
+Version:        1.1.22
 Release:        1%{?dist}
 Summary:        EGLStream-based Wayland external platform
 License:        MIT
@@ -73,6 +73,9 @@ find %{buildroot} -name '*.la' -delete
 %{_libdir}/pkgconfig/wayland-eglstream.pc
 
 %changelog
+* Fri Sep 04 2026 Simone Caronni <negativo17@gmail.com> - 1.1.22-1
+- Update to 1.1.22.
+
 * Wed Dec 10 2025 Simone Caronni <negativo17@gmail.com> - 1.1.21-1
 - Update to 1.1.21.
 
