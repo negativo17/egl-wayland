@@ -1,5 +1,5 @@
 Name:           egl-wayland
-Version:        1.1.22
+Version:        1.1.23
 Release:        1%{?dist}
 Summary:        EGLStream-based Wayland external platform
 License:        MIT
@@ -9,6 +9,7 @@ Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 
 # Bundle missing Wayland Protocols:
 Source1:        https://gitlab.freedesktop.org/wayland/wayland-protocols/-/raw/1.45/staging/linux-drm-syncobj/linux-drm-syncobj-v1.xml
+Source2:        https://gitlab.freedesktop.org/wayland/wayland-protocols/-/raw/1.49/stable/linux-dmabuf/linux-dmabuf-v1.xml
 Patch0:         %{name}-missing-protocols.patch
 
 BuildRequires:  cmake
@@ -49,7 +50,7 @@ This package contains development files.
 %prep
 %autosetup -p1
 
-cp %{SOURCE1} src/
+cp %{SOURCE1} %{SOURCE2} src/
 
 %build
 %meson
@@ -73,6 +74,10 @@ find %{buildroot} -name '*.la' -delete
 %{_libdir}/pkgconfig/wayland-eglstream.pc
 
 %changelog
+* Wed Sep 30 2026 Simone Caronni <negativo17@gmail.com> - 1.1.23-1
+- Update to 1.1.23.
+- Bundle linux-dmabuf-v1 protocol from wayland-protocols 1.49.
+
 * Fri Sep 04 2026 Simone Caronni <negativo17@gmail.com> - 1.1.22-1
 - Update to 1.1.22.
 
