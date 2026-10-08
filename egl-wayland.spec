@@ -1,5 +1,5 @@
 Name:           egl-wayland
-Version:        1.1.23
+Version:        1.1.24
 Release:        1%{?dist}
 Summary:        EGLStream-based Wayland external platform
 License:        MIT
@@ -74,6 +74,9 @@ find %{buildroot} -name '*.la' -delete
 %{_libdir}/pkgconfig/wayland-eglstream.pc
 
 %changelog
+* Thu Oct 08 2026 Simone Caronni <negativo17@gmail.com> - 1.1.24-1
+- Update to 1.1.24.
+
 * Wed Sep 30 2026 Simone Caronni <negativo17@gmail.com> - 1.1.23-1
 - Update to 1.1.23.
 - Bundle linux-dmabuf-v1 protocol from wayland-protocols 1.49.
